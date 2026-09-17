@@ -714,9 +714,10 @@ function Home() {
             </ScrollReveal>
             <div className="emotional-copy">
               <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
-                Llamadas que nadie responde. Documentos que no llegan. Procesos
-                que nadie explica. Resolver desde otro país puede ser
-                frustrante.
+                Navegar el sistema legal de México y Estados Unidos exige
+                precisión y comunicación estratégica. Transformamos esta gestión
+                en un proceso transparente, donde usted tiene visibilidad y
+                control total de sus trámites en todo momento.
               </ScrollReveal>
               <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
                 En BJG creemos que debe funcionar diferente: con personas que
