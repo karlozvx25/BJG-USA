@@ -712,7 +712,9 @@ function Home() {
           </ScrollReveal>
           <div>
             <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
-              Estar lejos no debería significar <em>perder el control.</em>
+              En cualquier ubicación,
+              <br />
+              <em>Control total y visibilidad absoluta.</em>
             </ScrollReveal>
             <div className="emotional-copy">
               <ScrollReveal as="p" baseRotation={1} blurStrength={2}>

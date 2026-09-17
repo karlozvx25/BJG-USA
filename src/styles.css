@@ -806,6 +806,9 @@ header.scrolled {
 }
 .emotional h2 em {
   color: #cec0a5;
+  display: block;
+  font-style: normal;
+  margin-top: 4px;
 }
 .emotional-copy {
   display: grid;
