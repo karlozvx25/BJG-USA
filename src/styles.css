@@ -407,6 +407,7 @@ header.scrolled {
   color: #ffffff;
   font-family: "DM Serif Display", Georgia, serif;
   display: inline-block;
+  margin-left: 150px;
 }
 .hero-title-sub {
   font-size: clamp(48px, 4.8vw, 76px);
@@ -1630,6 +1631,7 @@ footer {
   .hero-title-top,
   .hero-title-legal {
     font-size: clamp(54px, 10vw, 86px);
+    margin-left: 0;
   }
   .hero-title-sub {
     font-size: clamp(32px, 5.5vw, 48px);
