@@ -311,8 +311,8 @@ function ServiceCards() {
           title="¿Qué necesitas resolver en México?"
         />
         <ScrollReveal as="p" containerClassName="section-aside" baseRotation={1} blurStrength={3}>
-          No necesitas saber cómo se llama tu problema legal. Cuéntanos lo que
-          pasa; nosotros te ayudamos a identificar el camino.
+          Comprender a detalle su situación es nuestro punto de partida.
+          Analizamos su situación para ofrecerle la solución jurídica adecuada.
         </ScrollReveal>
       </div>
       <div className="services-grid">
