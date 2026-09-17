@@ -208,17 +208,30 @@ function Hero({
           </p>
           <h1>
             {service ? (
-              <span className="hero-title-main">{service.label} en México.</span>
+              <>
+                <span className="hero-title-top">{service.label}</span>
+                <span className="hero-title-second-row">
+                  <span className="hero-title-legal">en México.</span>
+                  <em className="hero-title-sub">Un camino claro, estés donde estés.</em>
+                </span>
+              </>
             ) : city ? (
-              <span className="hero-title-main">Certeza legal {city}.</span>
+              <>
+                <span className="hero-title-top">Certeza</span>
+                <span className="hero-title-second-row">
+                  <span className="hero-title-legal">legal {city}.</span>
+                  <em className="hero-title-sub">En ambos lados de la frontera.</em>
+                </span>
+              </>
             ) : (
-              <span className="hero-title-main">Certeza Legal</span>
-            )}{" "}
-            <em>
-              {service
-                ? "Un camino claro, estés donde estés."
-                : "En ambos lados de la frontera."}
-            </em>
+              <>
+                <span className="hero-title-top">Certeza</span>
+                <span className="hero-title-second-row">
+                  <span className="hero-title-legal">Legal</span>
+                  <em className="hero-title-sub">En ambos lados de la frontera.</em>
+                </span>
+              </>
+            )}
           </h1>
           <div className="hero-actions">
             <CTA />

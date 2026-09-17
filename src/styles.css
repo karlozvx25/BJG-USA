@@ -325,8 +325,8 @@ header.scrolled {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 40px;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 30px;
   padding-top: 120px;
   padding-bottom: 25px;
   flex: 1;
@@ -385,7 +385,7 @@ header.scrolled {
   color: #a5b2bc;
   margin-bottom: 27px;
 }
-.hero-title-main {
+.hero-title-top {
   font-size: clamp(80px, 8.8vw, 136px);
   line-height: 0.94;
   display: block;
@@ -393,13 +393,29 @@ header.scrolled {
   color: #ffffff;
   font-family: "DM Serif Display", Georgia, serif;
 }
-.hero h1 em {
-  display: block;
-  font-size: clamp(26px, 2.8vw, 42px);
-  color: #d6c8ad;
-  margin-top: 14px;
-  line-height: 1.18;
+.hero-title-second-row {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px 22px;
+  margin-top: 6px;
+}
+.hero-title-legal {
+  font-size: clamp(80px, 8.8vw, 136px);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  color: #ffffff;
   font-family: "DM Serif Display", Georgia, serif;
+  display: inline-block;
+}
+.hero-title-sub {
+  font-size: clamp(48px, 4.8vw, 76px);
+  color: #d6c8ad;
+  line-height: 1;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-style: normal;
+  display: inline-block;
+  white-space: nowrap;
 }
 .hero-description {
   font-size: 15px;
@@ -1610,11 +1626,13 @@ footer {
     white-space: normal;
     display: inline;
   }
-  .hero-title-main {
-    font-size: clamp(56px, 10vw, 92px);
+  .hero-title-top,
+  .hero-title-legal {
+    font-size: clamp(54px, 10vw, 86px);
   }
-  .hero h1 em {
-    font-size: clamp(22px, 4.5vw, 34px);
+  .hero-title-sub {
+    font-size: clamp(32px, 5.5vw, 48px);
+    white-space: normal;
   }
   .hero-actions {
     flex-direction: column;
@@ -1759,12 +1777,13 @@ footer {
     padding-bottom: 25px;
     gap: 35px;
   }
-  .hero-title-main {
-    font-size: clamp(48px, 12.5vw, 76px);
-    max-width: 490px;
+  .hero-title-top,
+  .hero-title-legal {
+    font-size: clamp(46px, 12vw, 70px);
   }
-  .hero h1 em {
-    font-size: clamp(20px, 5.2vw, 30px);
+  .hero-title-sub {
+    font-size: clamp(26px, 6.5vw, 38px);
+    white-space: normal;
   }
   .hero-description {
     font-size: 14px;
