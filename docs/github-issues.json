@@ -1,0 +1,82 @@
+[
+  {
+    "title": "F1 · Validar contenido e identidad",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/1",
+    "phase": "F1 Contenido"
+  },
+  {
+    "title": "F1 · Incorporar fotografías y testimonios reales",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/2",
+    "phase": "F1 Contenido"
+  },
+  {
+    "title": "F2 · Afinar efectos y microinteracciones",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/3",
+    "phase": "F2 Experiencia"
+  },
+  {
+    "title": "F2 · Animaciones, video y rendimiento móvil",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/4",
+    "phase": "F2 Experiencia"
+  },
+  {
+    "title": "F2 · Auditoría de accesibilidad y navegación",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/5",
+    "phase": "F2 Experiencia"
+  },
+  {
+    "title": "F3 · Proteger repositorio, secretos y entrega",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/6",
+    "phase": "F3 Seguridad"
+  },
+  {
+    "title": "F3 · API segura para recibir casos",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/7",
+    "phase": "F3 Seguridad"
+  },
+  {
+    "title": "F3 · Portal privado y seguridad de documentos",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/8",
+    "phase": "F3 Seguridad"
+  },
+  {
+    "title": "F4 · Conectar correo del despacho",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/9",
+    "phase": "F4 Canales"
+  },
+  {
+    "title": "F4 · Conectar WhatsApp empresarial",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/10",
+    "phase": "F4 Canales"
+  },
+  {
+    "title": "F4 · Integrar redes sociales y vistas compartidas",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/11",
+    "phase": "F4 Canales"
+  },
+  {
+    "title": "F4 · Integrar CRM y seguimiento comercial",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/12",
+    "phase": "F4 Canales"
+  },
+  {
+    "title": "F5 · Medición, consentimiento y atribución",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/13",
+    "phase": "F5 Marketing"
+  },
+  {
+    "title": "F5 · SEO y landings por ciudad/servicio",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/14",
+    "phase": "F5 Marketing"
+  },
+  {
+    "title": "F5 · Preparar campaña piloto",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/15",
+    "phase": "F5 Marketing"
+  },
+  {
+    "title": "F6 · Lanzamiento, monitorización y mejora",
+    "url": "https://github.com/karlozvx25/BJG-USA/issues/16",
+    "phase": "F6 Lanzamiento"
+  }
+]
