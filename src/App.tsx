@@ -706,7 +706,7 @@ function Home() {
         <section className="emotional">
         <div className="container emotional-grid">
           <ScrollReveal as="p" containerClassName="eyebrow light" baseRotation={1} blurStrength={2}>
-            CERTEZA A DISTANCIA
+            COBERTURA JURÍDICA INTEGRAL
           </ScrollReveal>
           <div>
             <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
