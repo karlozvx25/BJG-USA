@@ -303,8 +303,31 @@ function Proof() {
 }
 const UsersIcon = Users;
 function ServiceCards() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    sectionRef.current.style.setProperty("--sec-mouse-x", `${x}px`);
+    sectionRef.current.style.setProperty("--sec-mouse-y", `${y}px`);
+  };
+
+  const handleMouseLeave = () => {
+    if (!sectionRef.current) return;
+    sectionRef.current.style.setProperty("--sec-mouse-x", "-1000px");
+    sectionRef.current.style.setProperty("--sec-mouse-y", "-1000px");
+  };
+
   return (
-    <section id="servicios" className="section services-section">
+    <section
+      id="servicios"
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="section services-section"
+    >
       <div className="container">
         <div className="section-top">
           <Heading
