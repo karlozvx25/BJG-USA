@@ -324,25 +324,26 @@ header.scrolled {
 .hero-grid {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1.35fr 0.65fr;
-  gap: 30px;
+  display: block;
+  width: 100%;
   padding-top: 120px;
   padding-bottom: 25px;
   flex: 1;
-  align-items: center;
 }
 .hero-bottom-right {
+  position: absolute;
+  right: 40px;
+  bottom: 25px;
   display: flex;
   justify-content: flex-end;
-  align-self: flex-end;
-  margin-bottom: 8px;
+  max-width: 520px;
+  z-index: 2;
 }
 .hero-statement {
   font-size: 14.5px;
   line-height: 1.75;
   color: #dce7f0;
-  max-width: 580px;
+  max-width: 520px;
   text-align: right;
   font-weight: 400;
   letter-spacing: normal;
@@ -1616,8 +1617,11 @@ footer {
     gap: 30px;
   }
   .hero-bottom-right {
+    position: static;
     justify-content: flex-start;
     align-self: flex-start;
+    margin-top: 25px;
+    max-width: 100%;
   }
   .hero-statement {
     text-align: left;
