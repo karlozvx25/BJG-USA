@@ -108,6 +108,8 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
+  const prevIsOpenRef = useRef(isOpen);
 
   const initChat = () => {
     setMessages([
@@ -128,8 +130,19 @@ export default function Chatbot() {
 
   useEffect(() => {
     if (isOpen) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      if (!prevIsOpenRef.current) {
+        // Al abrir el modal: siempre mostrar arriba la presentación y la pregunta inicial
+        setTimeout(() => {
+          if (chatMessagesRef.current) {
+            chatMessagesRef.current.scrollTop = 0;
+          }
+        }, 10);
+      } else if (messages.length > 1) {
+        // Al interactuar o responder: desplazar suavemente a la nueva respuesta
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      }
     }
+    prevIsOpenRef.current = isOpen;
   }, [messages, isOpen]);
 
   const handleOptionClick = (action: string, label: string) => {
@@ -252,6 +265,11 @@ export default function Chatbot() {
 
   const handleReset = () => {
     initChat();
+    setTimeout(() => {
+      if (chatMessagesRef.current) {
+        chatMessagesRef.current.scrollTop = 0;
+      }
+    }, 20);
   };
 
   return (
@@ -310,7 +328,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages */}
-          <div className="bjg-chat-messages">
+          <div className="bjg-chat-messages" ref={chatMessagesRef}>
             {messages.map((m) => (
               <div key={m.id} className={`bjg-message-row ${m.sender}`}>
                 {m.sender === "bot" && (
