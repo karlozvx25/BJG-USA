@@ -715,9 +715,17 @@ function Home() {
             <div className="emotional-copy">
               <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
                 Navegar el sistema legal de México y Estados Unidos exige
-                precisión y comunicación estratégica. Transformamos esta gestión
-                en un proceso transparente, donde usted tiene visibilidad y
-                control total de sus trámites en todo momento.
+                precisión y comunicación estratégica.
+              </ScrollReveal>
+              <ScrollReveal
+                as="p"
+                baseRotation={1}
+                blurStrength={2}
+                containerClassName="emotional-copy-right"
+              >
+                Transformamos esta gestión en un proceso transparente, donde
+                usted tiene visibilidad y control total de sus trámites en todo
+                momento.
               </ScrollReveal>
             </div>
           </div>

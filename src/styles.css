@@ -808,6 +808,11 @@ header.scrolled {
   font-size: 14px;
   color: #bac8d2;
 }
+.emotional-copy-right {
+  text-align: right;
+  margin-left: auto;
+  max-width: 460px;
+}
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1967,6 +1972,10 @@ footer {
     grid-template-columns: 1fr;
     gap: 18px;
     font-size: 14px;
+  }
+  .emotional-copy-right {
+    text-align: left;
+    margin-left: 0;
   }
   .process-grid {
     grid-template-columns: 1fr 1fr;
