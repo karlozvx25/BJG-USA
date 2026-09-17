@@ -304,45 +304,47 @@ function Proof() {
 const UsersIcon = Users;
 function ServiceCards() {
   return (
-    <section id="servicios" className="section container">
-      <div className="section-top">
-        <Heading
-          eyebrow="EMPECEMOS POR LO QUE IMPORTA"
-          title="¿Qué necesitas resolver en México?"
-        />
-        <ScrollReveal as="p" containerClassName="section-aside" baseRotation={1} blurStrength={3}>
-          Comprender a detalle su situación es nuestro punto de partida.
-          Analizamos su situación para ofrecerle la solución jurídica adecuada.
-        </ScrollReveal>
-      </div>
-      <div className="services-grid">
-        {services.map((s, i) => (
-          <SpotlightCard
-            key={s.slug}
-            as={Link}
-            to={`/servicios/${s.slug}`}
-            className="service-card"
-            spotlightColor="rgba(255, 255, 255, 0.22)"
-          >
-            <div
-              className="service-card-bg-img"
-              style={{ backgroundImage: `url(/images/services/${s.slug}.jpg)` }}
-            />
-            <div className="card-top">
-              <s.icon size={29} strokeWidth={1.3} />
-              <span>0{i + 1}</span>
-            </div>
-            <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
-              {s.title}
-            </ScrollReveal>
-            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
-              {s.description}
-            </ScrollReveal>
-            <span className="card-link">
-              Ver opciones <Arrow />
-            </span>
-          </SpotlightCard>
-        ))}
+    <section id="servicios" className="section services-section">
+      <div className="container">
+        <div className="section-top">
+          <Heading
+            eyebrow="EMPECEMOS POR LO QUE IMPORTA"
+            title="¿Qué necesitas resolver en México?"
+          />
+          <ScrollReveal as="p" containerClassName="section-aside" baseRotation={1} blurStrength={3}>
+            Comprender a detalle su situación es nuestro punto de partida.
+            Analizamos su situación para ofrecerle la solución jurídica adecuada.
+          </ScrollReveal>
+        </div>
+        <div className="services-grid">
+          {services.map((s, i) => (
+            <SpotlightCard
+              key={s.slug}
+              as={Link}
+              to={`/servicios/${s.slug}`}
+              className="service-card"
+              spotlightColor="rgba(255, 255, 255, 0.22)"
+            >
+              <div
+                className="service-card-bg-img"
+                style={{ backgroundImage: `url(/images/services/${s.slug}.jpg)` }}
+              />
+              <div className="card-top">
+                <s.icon size={29} strokeWidth={1.3} />
+                <span>0{i + 1}</span>
+              </div>
+              <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
+                {s.title}
+              </ScrollReveal>
+              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+                {s.description}
+              </ScrollReveal>
+              <span className="card-link">
+                Ver opciones <Arrow />
+              </span>
+            </SpotlightCard>
+          ))}
+        </div>
       </div>
     </section>
   );
