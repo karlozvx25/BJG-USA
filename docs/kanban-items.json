@@ -1,0 +1,114 @@
+[
+  {
+    "title": "F1 · Validar contenido e identidad",
+    "phase": "F1 Contenido",
+    "scope": "Confirmar fecha 1979, servicios, cobertura por ciudad, credenciales, responsables y avisos.",
+    "acceptance": "Contenido aprobado por el despacho; no quedan cifras ni ubicaciones sin respaldo.",
+    "dependencies": "Ninguna"
+  },
+  {
+    "title": "F1 · Incorporar fotografías y testimonios reales",
+    "phase": "F1 Contenido",
+    "scope": "Recibir fotos del equipo, oficina, archivo histórico y testimonios autorizados. Sustituir placeholders; generar tamaños web y textos alternativos.",
+    "acceptance": "Permisos de uso registrados; imágenes responsive sin deformación; testimonios con subtítulos y datos aprobados.",
+    "dependencies": "Validar contenido e identidad"
+  },
+  {
+    "title": "F2 · Afinar efectos y microinteracciones",
+    "phase": "F2 Experiencia",
+    "scope": "Implementar entradas sobrias de secciones y estados del proceso, revisar hover, foco, header y Connection Line.",
+    "acceptance": "Reduced-motion respetado; contenido visible sin animación; ninguna interacción bloquea lectura o formulario.",
+    "dependencies": "Validar contenido e identidad"
+  },
+  {
+    "title": "F2 · Animaciones, video y rendimiento móvil",
+    "phase": "F2 Experiencia",
+    "scope": "Integrar video subtitulado, lazy loading, dimensiones estables, imágenes WebP/AVIF y presupuesto de rendimiento.",
+    "acceptance": "Sin reproducción sonora automática; controles accesibles; revisar LCP, CLS e INP con contenido real y red lenta.",
+    "dependencies": "Fotografías y testimonios"
+  },
+  {
+    "title": "F2 · Auditoría de accesibilidad y navegación",
+    "phase": "F2 Experiencia",
+    "scope": "Revisar contraste, tipografía auxiliar, teclado, lector de pantalla, foco, errores y rutas móviles.",
+    "acceptance": "Recorrido completo sin ratón; formularios anuncian errores; controles táctiles legibles; evidencia en PR.",
+    "dependencies": "Efectos y fotografías"
+  },
+  {
+    "title": "F3 · Proteger repositorio, secretos y entrega",
+    "phase": "F3 Seguridad",
+    "scope": "Revisar visibilidad con titular; configurar acceso mínimo, MFA, revisión por PR, escaneo de secretos y build CI. No intentar ocultar JS del navegador.",
+    "acceptance": "No secretos en fuente/bundle; sólo dist se publica; reglas y responsable documentados; no .git/.env en alojamiento.",
+    "dependencies": "Ninguna"
+  },
+  {
+    "title": "F3 · API segura para recibir casos",
+    "phase": "F3 Seguridad",
+    "scope": "Crear endpoint con validación servidor, rate limiting, antispam, idempotencia, registro mínimo y retención.",
+    "acceptance": "Confirmación sólo tras recepción; reintentos sin duplicados; pruebas de entradas inválidas y abuso.",
+    "dependencies": "Avisos aprobados y arquitectura backend"
+  },
+  {
+    "title": "F3 · Portal privado y seguridad de documentos",
+    "phase": "F3 Seguridad",
+    "scope": "Implementar autenticación, autorización por expediente, roles, almacenamiento privado, URLs firmadas, auditoría y recuperación.",
+    "acceptance": "Usuario A no puede leer recursos de B; URLs expiran; pruebas de acceso y restauración aprobadas.",
+    "dependencies": "Arquitectura backend y política de datos"
+  },
+  {
+    "title": "F4 · Conectar correo del despacho",
+    "phase": "F4 Canales",
+    "scope": "Confirmar buzón/dominio, configurar SPF/DKIM/DMARC y servicio de notificación desde backend con reintentos.",
+    "acceptance": "Entrega, rebotes y errores probados; sin credenciales cliente ni narrativa jurídica completa en correo.",
+    "dependencies": "API segura"
+  },
+  {
+    "title": "F4 · Conectar WhatsApp empresarial",
+    "phase": "F4 Canales",
+    "scope": "Confirmar número; enlace de conversación genérico y, si se aprueba, Cloud API con webhooks, firma y cola.",
+    "acceptance": "Clic diferenciado de lead; reglas/consentimientos revisados; secretos servidor; responsable de atención definido.",
+    "dependencies": "Número y proceso de atención confirmados"
+  },
+  {
+    "title": "F4 · Integrar redes sociales y vistas compartidas",
+    "phase": "F4 Canales",
+    "scope": "Confirmar perfiles oficiales e incorporar enlaces, Open Graph, imagen social y metadatos por landing.",
+    "acceptance": "Enlaces reales y accesibles; preview correcto; ningún SDK ni píxel se activa sin decisión de medición.",
+    "dependencies": "Identidad y perfiles oficiales"
+  },
+  {
+    "title": "F4 · Integrar CRM y seguimiento comercial",
+    "phase": "F4 Canales",
+    "scope": "Definir proveedor, etapas, campos, responsables, deduplicación y seguimiento de leads. Separar datos jurídicos de marketing.",
+    "acceptance": "Un lead de prueba recorre el embudo; reintentos controlados; origen y responsable registrados.",
+    "dependencies": "API segura y política de datos"
+  },
+  {
+    "title": "F5 · Medición, consentimiento y atribución",
+    "phase": "F5 Marketing",
+    "scope": "Definir eventos/UTM; integrar analítica y conversiones aprobadas; excluir PII y deduplicar browser/servidor.",
+    "acceptance": "Eventos comprobados en red/debug; intake_accepted sólo tras backend; revocación de consentimiento probada.",
+    "dependencies": "CRM, API y revisión de privacidad"
+  },
+  {
+    "title": "F5 · SEO y landings por ciudad/servicio",
+    "phase": "F5 Marketing",
+    "scope": "Redactar contenido original, guías revisadas, canonical, sitemap, metadata y evaluar prerender/SSR.",
+    "acceptance": "Sin oficinas inventadas; URLs recargan; HTTP/SEO revisado; cada landing tiene contenido y CTA operativo.",
+    "dependencies": "Contenido validado"
+  },
+  {
+    "title": "F5 · Preparar campaña piloto",
+    "phase": "F5 Marketing",
+    "scope": "Elegir ciudad/servicio de capacidad confirmada, piezas, mensajes, presupuesto, cuentas y objetivos de leads calificados.",
+    "acceptance": "Presupuesto y piezas aprobados; prueba extremo a extremo; no se lanza tráfico a demo.",
+    "dependencies": "Canales, medición, SEO y operación listos"
+  },
+  {
+    "title": "F6 · Lanzamiento, monitorización y mejora",
+    "phase": "F6 Lanzamiento",
+    "scope": "Confirmar alojamiento/dominio; staging, TLS, cabeceras, rollback y monitoreo. Evaluar resultados por ciudad/servicio/canal.",
+    "acceptance": "Checklist go/no-go firmado por responsables; versión trazable; rollback probado; revisión de leads y respuesta.",
+    "dependencies": "Seguridad, contenido, integraciones y campaña aprobados"
+  }
+]
