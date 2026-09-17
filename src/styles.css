@@ -812,6 +812,7 @@ header.scrolled {
   text-align: right;
   margin-left: auto;
   max-width: 460px;
+  margin-top: 45px;
 }
 .process-grid {
   display: grid;
@@ -1976,6 +1977,7 @@ footer {
   .emotional-copy-right {
     text-align: left;
     margin-left: 0;
+    margin-top: 0;
   }
   .process-grid {
     grid-template-columns: 1fr 1fr;

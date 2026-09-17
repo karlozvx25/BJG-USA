@@ -724,8 +724,7 @@ function Home() {
                 containerClassName="emotional-copy-right"
               >
                 Transformamos esta gestión en un proceso transparente, donde
-                usted tiene visibilidad y control total de sus trámites en todo
-                momento.
+                usted tiene visibilidad y control total de sus trámites.
               </ScrollReveal>
             </div>
           </div>
