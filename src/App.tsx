@@ -719,10 +719,6 @@ function Home() {
                 en un proceso transparente, donde usted tiene visibilidad y
                 control total de sus trámites en todo momento.
               </ScrollReveal>
-              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
-                En BJG creemos que debe funcionar diferente: con personas que
-                escuchan, explicaciones claras y un siguiente paso visible.
-              </ScrollReveal>
             </div>
           </div>
         </div>
