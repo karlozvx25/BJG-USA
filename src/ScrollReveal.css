@@ -1,0 +1,16 @@
+.scroll-reveal {
+  display: block;
+  transform-origin: 0% 50%;
+}
+
+p.scroll-reveal.eyebrow {
+  display: flex;
+}
+
+.scroll-reveal-text {
+  display: inline;
+}
+
+.scroll-reveal-text .word {
+  display: inline-block;
+}

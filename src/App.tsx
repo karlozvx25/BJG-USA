@@ -23,6 +23,9 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { cities, faqs, guides, services, states, steps } from "./content";
+import ScrollReveal from "./ScrollReveal";
+import SpotlightCard from "./SpotlightCard";
+import Chatbot from "./Chatbot";
 const Arrow = () => <ArrowUpRight size={18} aria-hidden="true" />;
 function CTA({
   children = "Cuéntanos tu caso",
@@ -51,9 +54,17 @@ function Heading({
 }) {
   return (
     <div className="section-heading">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      {children && <p className="lede">{children}</p>}
+      <ScrollReveal as="p" containerClassName="eyebrow" baseRotation={1} blurStrength={3}>
+        {eyebrow}
+      </ScrollReveal>
+      <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
+        {title}
+      </ScrollReveal>
+      {children && (
+        <ScrollReveal as="p" containerClassName="lede" baseRotation={1} blurStrength={3}>
+          {children}
+        </ScrollReveal>
+      )}
     </div>
   );
 }
@@ -88,7 +99,7 @@ function Header() {
       <a className="skip" href="#main">
         Saltar al contenido
       </a>
-      <header className={scrolled ? "scrolled" : ""}>
+      <header className={scrolled || location.pathname !== "/" ? "scrolled" : ""}>
         <div className="header-inner">
           <Brand />
           <nav className="desktop-nav" aria-label="Principal">
@@ -174,6 +185,16 @@ function Hero({
 }) {
   return (
     <section className="hero">
+      <div className="hero-video-bg">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/8k,_static_camera_202609081753.mp4"
+        />
+        <div className="hero-video-overlay" />
+      </div>
       <div className="container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow light">
@@ -189,19 +210,14 @@ function Hero({
             {service
               ? `${service.label} en México.`
               : city
-                ? `Tu vida está en ${city}.`
-                : "Tu vida está en Estados Unidos."}
+                ? `Certeza legal ${city}.`
+                : "Certeza Legal"}{" "}
             <em>
               {service
                 ? "Un camino claro, estés donde estés."
-                : "Tus asuntos en México no están solos."}
+                : "En ambos lados de la frontera."}
             </em>
           </h1>
-          <p className="hero-description">
-            {service
-              ? service.description
-              : "Protegemos tu patrimonio, familia y empresa en México mientras tú continúas construyendo tu vida en Estados Unidos."}
-          </p>
           <div className="hero-actions">
             <CTA />
             <Link to="/#proceso" className="text-link">
@@ -217,32 +233,19 @@ function Hero({
             </span>
           </div>
         </div>
-        <div className="hero-visual">
-          <div className="visual-top">
-            <span>LA DISTANCIA CAMBIA.</span>
-            <span>LA CONFIANZA PERMANECE.</span>
-          </div>
-          <Art />
-          <div className="connection">
-            <i />
-            <span>ESTADOS UNIDOS</span>
-            <div />
-            <span>MÉXICO</span>
-            <i />
-          </div>
-          <div className="floating-status">
-            <div className="status-icon">
-              <CircleCheck size={23} />
-            </div>
-            <div>
-              <span className="eyebrow">EXPEDIENTE ACTUALIZADO</span>
-              <strong>Documentación recibida</strong>
-              <small>Próximo paso: revisión jurídica · Demo</small>
-            </div>
-          </div>
-          <span className="visual-bottom">
-            MÉXICO SIGUE CERCA. <span>01 — BJG USA</span>
-          </span>
+        <div className="hero-bottom-right">
+          <p className="hero-statement">
+            {service ? (
+              service.description
+            ) : (
+              <>
+                <span>Protegemos tu patrimonio, familia y empresa en México</span>{" "}
+                <span className="hero-statement-line2">
+                  mientras tú continúas construyendo tu vida en Estados Unidos.
+                </span>
+              </>
+            )}
+          </p>
         </div>
       </div>
       <div className="hero-baseline container">
@@ -270,13 +273,13 @@ function Proof() {
         ].map(([Icon, t, d]) => {
           const I = Icon as typeof Globe2;
           return (
-            <div key={String(t)}>
+            <ScrollReveal as="div" key={String(t)} baseRotation={0.5} blurStrength={2} containerClassName="proof-item">
               <I size={24} />
               <div>
                 <strong>{String(t)}</strong>
                 <span>{String(d)}</span>
               </div>
-            </div>
+            </ScrollReveal>
           );
         })}
       </div>
@@ -292,28 +295,34 @@ function ServiceCards() {
           eyebrow="EMPECEMOS POR LO QUE IMPORTA"
           title="¿Qué necesitas resolver en México?"
         />
-        <p className="section-aside">
+        <ScrollReveal as="p" containerClassName="section-aside" baseRotation={1} blurStrength={3}>
           No necesitas saber cómo se llama tu problema legal. Cuéntanos lo que
           pasa; nosotros te ayudamos a identificar el camino.
-        </p>
+        </ScrollReveal>
       </div>
       <div className="services-grid">
         {services.map((s, i) => (
-          <Link
+          <SpotlightCard
+            key={s.slug}
+            as={Link}
             to={`/servicios/${s.slug}`}
             className="service-card"
-            key={s.slug}
+            spotlightColor="rgba(255, 255, 255, 0.22)"
           >
             <div className="card-top">
               <s.icon size={29} strokeWidth={1.3} />
               <span>0{i + 1}</span>
             </div>
-            <h3>{s.title}</h3>
-            <p>{s.description}</p>
+            <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
+              {s.title}
+            </ScrollReveal>
+            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+              {s.description}
+            </ScrollReveal>
             <span className="card-link">
               Ver opciones <Arrow />
             </span>
-          </Link>
+          </SpotlightCard>
         ))}
       </div>
     </section>
@@ -328,11 +337,15 @@ function Process() {
       />
       <div className="process-grid">
         {steps.map(([t, d], i) => (
-          <div key={t}>
+          <ScrollReveal as="div" key={t} baseRotation={1} blurStrength={3} containerClassName="process-step-item">
             <span className="step-number">0{i + 1}</span>
-            <h3>{t}</h3>
-            <p>{d}</p>
-          </div>
+            <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
+              {t}
+            </ScrollReveal>
+            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+              {d}
+            </ScrollReveal>
+          </ScrollReveal>
         ))}
       </div>
       <CTA />
@@ -468,16 +481,18 @@ function Portal() {
     <section className="portal-section" id="expediente">
       <div className="container portal-grid">
         <div>
-          <p className="eyebrow light">TRANSPARENCIA DIGITAL</p>
-          <h2>
+          <ScrollReveal as="p" containerClassName="eyebrow light" baseRotation={1} blurStrength={2}>
+            TRANSPARENCIA DIGITAL
+          </ScrollReveal>
+          <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
             Tu caso.
             <br />
             <em>Siempre visible.</em>
-          </h2>
-          <p>
+          </ScrollReveal>
+          <ScrollReveal as="p" baseRotation={1} blurStrength={3}>
             Cuando estás lejos, saber qué está pasando importa. Un espacio para
             tus documentos, avances y próximos pasos.
-          </p>
+          </ScrollReveal>
           <ul className="check-list">
             <li>
               <Check /> Información en un solo lugar
@@ -522,15 +537,19 @@ function Contact() {
     <section id="contacto" className="section contact-section">
       <div className="container contact-grid">
         <div>
-          <p className="eyebrow light">TU SIGUIENTE PASO EMPIEZA AQUÍ</p>
-          <h2>
+          <ScrollReveal as="p" containerClassName="eyebrow light" baseRotation={1} blurStrength={2}>
+            TU SIGUIENTE PASO EMPIEZA AQUÍ
+          </ScrollReveal>
+          <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
             La distancia no debería <em>detenerte.</em>
-          </h2>
-          <p>
+          </ScrollReveal>
+          <ScrollReveal as="p" baseRotation={1} blurStrength={3}>
             Cuéntanos qué necesitas resolver en México. No necesitas usar
             términos jurídicos.
-          </p>
-          <span className="contact-signature">México sigue cerca.</span>
+          </ScrollReveal>
+          <ScrollReveal as="span" containerClassName="contact-signature" baseRotation={1} blurStrength={2}>
+            México sigue cerca.
+          </ScrollReveal>
         </div>
         <div className="contact-form">
           {done ? (
@@ -662,25 +681,28 @@ function Home() {
   return (
     <>
       <Hero />
-      <Proof />
-      <ServiceCards />
-      <section className="emotional">
+      <div className="main-content-flow">
+        <Proof />
+        <ServiceCards />
+        <section className="emotional">
         <div className="container emotional-grid">
-          <p className="eyebrow light">CERTEZA A DISTANCIA</p>
+          <ScrollReveal as="p" containerClassName="eyebrow light" baseRotation={1} blurStrength={2}>
+            CERTEZA A DISTANCIA
+          </ScrollReveal>
           <div>
-            <h2>
+            <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
               Estar lejos no debería significar <em>perder el control.</em>
-            </h2>
+            </ScrollReveal>
             <div className="emotional-copy">
-              <p>
+              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
                 Llamadas que nadie responde. Documentos que no llegan. Procesos
                 que nadie explica. Resolver desde otro país puede ser
                 frustrante.
-              </p>
-              <p>
+              </ScrollReveal>
+              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
                 En BJG creemos que debe funcionar diferente: con personas que
                 escuchan, explicaciones claras y un siguiente paso visible.
-              </p>
+              </ScrollReveal>
             </div>
           </div>
         </div>
@@ -693,10 +715,10 @@ function Home() {
             eyebrow="PERSONAS DETRÁS DEL DERECHO"
             title="Detrás de cada caso hay una historia."
           />
-          <p className="section-aside">
+          <ScrollReveal as="p" containerClassName="section-aside" baseRotation={1} blurStrength={3}>
             Y detrás de cada expediente, personas trabajando para resolverla.
             Experiencia jurídica, análisis y acompañamiento personal.
-          </p>
+          </ScrollReveal>
         </div>
         <div className="team-grid">
           {[
@@ -709,8 +731,8 @@ function Home() {
                 compact
                 label={`Retrato del equipo · ${String(i + 1).padStart(2, "0")}`}
               />
-              <h3>{t}</h3>
-              <p>Perfil y credenciales por incorporar.</p>
+              <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>{t}</ScrollReveal>
+              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>Perfil y credenciales por incorporar.</ScrollReveal>
             </article>
           ))}
         </div>
@@ -726,18 +748,20 @@ function Home() {
           <span>Seguimiento</span>
         </div>
         <div>
-          <p className="eyebrow">TRABAJO COLEGIADO</p>
-          <h2>
+          <ScrollReveal as="p" containerClassName="eyebrow" baseRotation={1} blurStrength={2}>
+            TRABAJO COLEGIADO
+          </ScrollReveal>
+          <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
             Más perspectivas.
             <br />
             Una misma dirección.
-          </h2>
-          <p>
+          </ScrollReveal>
+          <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
             Un caso complejo no debería depender de una sola opinión. Cuando un
             asunto lo requiere, el equipo puede analizarlo desde diferentes
             perspectivas jurídicas para construir una estrategia mejor
             fundamentada.
-          </p>
+          </ScrollReveal>
         </div>
       </section>
       <section className="section container" id="testimonios">
@@ -751,12 +775,14 @@ function Home() {
             <span className="demo-badge">
               ESPACIO EDITORIAL · TESTIMONIO PENDIENTE
             </span>
-            <h3>La tranquilidad de saber qué sigue.</h3>
-            <p>
+            <ScrollReveal as="h3" baseRotation={1} blurStrength={2}>
+              La tranquilidad de saber qué sigue.
+            </ScrollReveal>
+            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
               Aquí compartiremos experiencias de clientes, con su autorización:
               qué necesitaban resolver en México, cómo vivieron el proceso y qué
               cambió para ellos.
-            </p>
+            </ScrollReveal>
             <span className="muted">
               Video subtitulado · Nombre · Ciudad · Tipo de asunto
             </span>
@@ -783,11 +809,13 @@ function Home() {
           </div>
           <div>
             <FileText size={28} />
-            <h3>Cada resultado tiene una historia.</h3>
-            <p>
+            <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
+              Cada resultado tiene una historia.
+            </ScrollReveal>
+            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
               Los casos y cifras se incorporarán con evidencia verificable. Cada
               asunto tiene circunstancias propias.
-            </p>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -799,19 +827,23 @@ function Home() {
           <small>ARCHIVO HISTÓRICO · FOTOGRAFÍAS POR INCORPORAR</small>
         </div>
         <div>
-          <p className="eyebrow">UNA HISTORIA DE CONFIANZA</p>
-          <h2>
+          <ScrollReveal as="p" containerClassName="eyebrow" baseRotation={1} blurStrength={2}>
+            UNA HISTORIA DE CONFIANZA
+          </ScrollReveal>
+          <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
             De una generación <em>a otra.</em>
-          </h2>
-          <p>
+          </ScrollReveal>
+          <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
             La práctica jurídica ha cambiado. La tecnología y la forma de
             comunicarnos también. Pero hay algo que no debería cambiar:
-          </p>
-          <h3>Decir la verdad al cliente.</h3>
-          <p>
+          </ScrollReveal>
+          <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
+            Decir la verdad al cliente.
+          </ScrollReveal>
+          <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
             Hoy esa convicción nos guía para acompañar a quienes construyen su
             vida lejos de México.
-          </p>
+          </ScrollReveal>
         </div>
       </section>
       <section className="guide-section" id="guia">
@@ -831,7 +863,7 @@ function Home() {
                   {["PATRIMONIO", "HERENCIAS", "REPRESENTACIÓN", "FAMILIA"][i]}{" "}
                   · BORRADOR EDITORIAL
                 </small>
-                <h3>{t}</h3>
+                <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>{t}</ScrollReveal>
                 <span className="card-link">
                   Explorar tema <Arrow />
                 </span>
@@ -840,24 +872,37 @@ function Home() {
           </div>
         </div>
       </section>
-      <section id="faq" className="section container faq-grid">
-        <Heading
-          eyebrow="HABLEMOS CON CLARIDAD"
-          title="Tus preguntas, un buen comienzo."
-        />
-        <div>
-          {faqs.map(([q, a]) => (
-            <details key={q}>
-              <summary>
-                {q}
-                <Plus size={19} />
-              </summary>
-              <p>{a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-      <Contact />
+        <section id="faq" className="faq-section">
+          <div className="faq-video-bg">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              src="/Fix_image_with_moving_clouds_202609081731.mp4"
+            />
+            <div className="faq-video-overlay" />
+          </div>
+          <div className="container faq-grid">
+            <Heading
+              eyebrow="HABLEMOS CON CLARIDAD"
+              title="Tus preguntas, un buen comienzo."
+            />
+            <div className="faq-list">
+              {faqs.map(([q, a]) => (
+                <details key={q}>
+                  <summary>
+                    {q}
+                    <Plus size={19} />
+                  </summary>
+                  <ScrollReveal as="p" baseRotation={1} blurStrength={2}>{a}</ScrollReveal>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+        <Contact />
+      </div>
     </>
   );
 }
@@ -865,28 +910,78 @@ function Landing() {
   const { city, service } = useParams();
   const found = services.find((s) => s.slug === service);
   if ((city && !cities[city]) || (service && !found)) return <NotFound />;
+
+  const descriptions: Record<string, string> = {
+    "propiedades-mexico":
+      "Empezamos por entender tu situación inmobiliaria en México. El equipo revisará escrituras, títulos, contratos o gravámenes y te explicará las opciones, documentos y próximos pasos para regularizar, comprar o vender sin necesidad de viajar.",
+    "herencias-mexico":
+      "Empezamos por entender tu situación sucesoria en México. El equipo revisará si existe testamento o si se requiere un juicio intestamentario, explicando las opciones para adjudicar o regularizar los bienes heredados.",
+    "poderes-mexico":
+      "Empezamos por entender qué trámite o acto jurídico necesitas autorizar en México. El equipo preparará la minuta exacta para tu poder notarial consular o apostillado en Estados Unidos con validez plena.",
+    "familia-mexico":
+      "Empezamos por entender tu situación familiar o de estado civil en México. El equipo analizará las opciones para divorcio a distancia, pensión alimenticia, custodia o corrección de actas en el Registro Civil.",
+    "empresas-mexico":
+      "Empezamos por entender las necesidades de tu empresa o negocio en México. El equipo estructurará contratos comerciales, poderes mercantiles o constitución de sociedades con total certeza y blindaje legal.",
+    "otros-asuntos":
+      "Empezamos por entender tu situación particular. El equipo revisará tu caso en sesión colegiada y te explicará las opciones jurídicas, documentos y próximos pasos que correspondan.",
+  };
+
+  const serviceDesc = found
+    ? descriptions[found.slug] || found.description
+    : "Empezamos por entender tu situación...";
+
+  const imageSrc = found ? `/images/services/${found.slug}.jpg` : "/images/services/propiedades-mexico.jpg";
+
   return (
-    <>
-      <Hero city={city ? cities[city] : undefined} service={found} />
-      <section className="section container narrow">
-        <p className="eyebrow">ATENCIÓN JURÍDICA EN MÉXICO</p>
-        <h2>{found ? found.title : "México sigue cerca."}</h2>
-        <p>
-          Empezamos por entender tu situación
-          {city ? ` desde ${cities[city]}` : ""}. El equipo revisará qué
-          necesitas resolver en México y te explicará las opciones, documentos y
-          próximos pasos que correspondan a tu caso.
-        </p>
-        <p>
-          La atención por ciudad se refiere al lugar de residencia del cliente;
-          no implica una oficina ni representación jurídica en Estados Unidos.
-        </p>
-        <CTA />
-      </section>
-      <Process />
-      <Portal />
-      <Contact />
-    </>
+    <div className="landing-emergence-page">
+      <div className="container landing-emergence-container">
+        <div className="landing-emergence-grid">
+          {/* Columna Izquierda: Imagen del Caso y Botón Regresar */}
+          <ScrollReveal as="div" containerClassName="landing-emergence-image-col" baseRotation={1} blurStrength={2}>
+            <div className="landing-emergence-image-wrapper">
+              <img
+                src={imageSrc}
+                alt={found ? found.title : "Bufete Jurídico Guadarrama"}
+                className="landing-emergence-img"
+                loading="eager"
+              />
+              <div className="landing-image-gloss" />
+            </div>
+
+            {/* Botón regresar abajo de la imagen */}
+            <Link
+              to="/#servicios"
+              className="service-return-btn"
+              aria-label="Regresar a servicios"
+            >
+              <ArrowLeft size={16} />
+              <span>Regresar a Servicios</span>
+            </Link>
+          </ScrollReveal>
+
+          {/* Columna Derecha: Texto y Contenido */}
+          <div className="landing-emergence-text-col">
+            <ScrollReveal as="p" containerClassName="eyebrow" baseRotation={1} blurStrength={2}>
+              ATENCIÓN JURÍDICA EN MÉXICO
+            </ScrollReveal>
+            <ScrollReveal as="h1" containerClassName="landing-emergence-title" baseRotation={1.5} blurStrength={3}>
+              {found ? found.title : "México sigue cerca."}
+            </ScrollReveal>
+            <ScrollReveal as="p" containerClassName="landing-emergence-desc" baseRotation={1} blurStrength={2}>
+              {serviceDesc}
+              {city ? ` Atención para residentes de ${cities[city]}.` : ""}
+            </ScrollReveal>
+            <ScrollReveal as="p" containerClassName="landing-emergence-disclaimer" baseRotation={1} blurStrength={2}>
+              La atención por ciudad se refiere al lugar de residencia del cliente;
+              no implica una oficina ni representación jurídica en Estados Unidos.
+            </ScrollReveal>
+            <div style={{ marginTop: "32px" }}>
+              <CTA />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 function Guide() {
@@ -898,22 +993,26 @@ function Guide() {
       <Link to="/#guia" className="text-link">
         <ArrowLeft size={16} /> Guía BJG
       </Link>
-      <p className="eyebrow">BORRADOR EDITORIAL · PENDIENTE DE REVISIÓN</p>
-      <h1>{title}</h1>
-      <p>
+      <ScrollReveal as="p" containerClassName="eyebrow" baseRotation={1} blurStrength={2}>
+        BORRADOR EDITORIAL · PENDIENTE DE REVISIÓN
+      </ScrollReveal>
+      <ScrollReveal as="h1" baseRotation={1.5} blurStrength={3}>
+        {title}
+      </ScrollReveal>
+      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
         Para iniciar una conversación con el equipo, puedes organizar estas
         preguntas:
-      </p>
+      </ScrollReveal>
       <ul className="article-list">
         <li>¿Qué necesito resolver y qué me preocupa más?</li>
         <li>¿En qué lugar de México está relacionado mi asunto?</li>
         <li>¿Quiénes están involucrados y qué información tengo disponible?</li>
         <li>¿Hay alguna fecha importante que deba mencionar?</li>
       </ul>
-      <p>
+      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
         El contenido específico de esta guía se incorporará después de su
         revisión por el despacho. No sustituye el análisis de tu situación.
-      </p>
+      </ScrollReveal>
       <CTA />
     </section>
   );
@@ -921,21 +1020,27 @@ function Guide() {
 function Legal() {
   return (
     <section className="section container narrow">
-      <p className="eyebrow">INFORMACIÓN DEL PROTOTIPO</p>
-      <h1>Transparencia desde el primer paso.</h1>
-      <p>
+      <ScrollReveal as="p" containerClassName="eyebrow" baseRotation={1} blurStrength={2}>
+        INFORMACIÓN DEL PROTOTIPO
+      </ScrollReveal>
+      <ScrollReveal as="h1" baseRotation={1.5} blurStrength={3}>
+        Transparencia desde el primer paso.
+      </ScrollReveal>
+      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
         La información presentada tiene fines informativos y no constituye
         asesoría jurídica personalizada. La atención de cada asunto dependerá de
         sus circunstancias y de la formalización de la relación profesional.
-      </p>
-      <h2>Privacidad y términos</h2>
-      <p>
+      </ScrollReveal>
+      <ScrollReveal as="h2" baseRotation={1.5} blurStrength={3}>
+        Privacidad y términos
+      </ScrollReveal>
+      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
         Esta demostración no envía formularios ni guarda sus datos en un
         servidor o en el navegador. No incluye analítica ni autenticación. Los
         avisos definitivos, la identidad del responsable y los canales para
         ejercer derechos deben incorporarse antes de habilitar la recepción de
         datos.
-      </p>
+      </ScrollReveal>
       <Link to="/" className="text-link">
         Volver al inicio <Arrow />
       </Link>
@@ -1051,6 +1156,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <Chatbot />
     </>
   );
 }
