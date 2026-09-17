@@ -416,6 +416,7 @@ header.scrolled {
   font-style: normal;
   display: inline-block;
   white-space: nowrap;
+  margin-left: 300px;
 }
 .hero-description {
   font-size: 15px;
@@ -1633,6 +1634,7 @@ footer {
   .hero-title-sub {
     font-size: clamp(32px, 5.5vw, 48px);
     white-space: normal;
+    margin-left: 0;
   }
   .hero-actions {
     flex-direction: column;
