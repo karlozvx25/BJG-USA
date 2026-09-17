@@ -886,9 +886,17 @@ header.scrolled {
   color: #66717c;
 }
 .portal-section {
+  position: relative;
   padding: 90px 0;
-  background: #0b1f33;
+  background-color: #0b1f33;
+  background-image: 
+    linear-gradient(rgba(11, 31, 51, 0.88), rgba(11, 31, 51, 0.90)),
+    url("/images/pexels-sora-shimazaki-5668473.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #f6f3ed;
+  overflow: hidden;
 }
 .portal-grid {
   display: grid;
