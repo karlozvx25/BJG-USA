@@ -792,9 +792,17 @@ header.scrolled {
   transform: translate(4px, -4px);
 }
 .emotional {
-  background: #17395c;
+  position: relative;
+  background-color: #17395c;
+  background-image: 
+    linear-gradient(rgba(18, 48, 78, 0.87), rgba(23, 57, 92, 0.89)),
+    url("/images/Gemini_Generated_Image_ugnj67ugnj67ugnj.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #f6f3ed;
   padding: 85px 0;
+  overflow: hidden;
 }
 .emotional-grid {
   display: grid;
