@@ -207,11 +207,13 @@ function Hero({
             Para mexicanos que viven en Estados Unidos
           </p>
           <h1>
-            {service
-              ? `${service.label} en México.`
-              : city
-                ? `Certeza legal ${city}.`
-                : "Certeza Legal"}{" "}
+            {service ? (
+              <span className="hero-title-main">{service.label} en México.</span>
+            ) : city ? (
+              <span className="hero-title-main">Certeza legal {city}.</span>
+            ) : (
+              <span className="hero-title-main">Certeza Legal</span>
+            )}{" "}
             <em>
               {service
                 ? "Un camino claro, estés donde estés."

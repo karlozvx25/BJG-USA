@@ -385,10 +385,21 @@ header.scrolled {
   color: #a5b2bc;
   margin-bottom: 27px;
 }
+.hero-title-main {
+  font-size: clamp(80px, 8.8vw, 136px);
+  line-height: 0.94;
+  display: block;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  font-family: "DM Serif Display", Georgia, serif;
+}
 .hero h1 em {
   display: block;
+  font-size: clamp(26px, 2.8vw, 42px);
   color: #d6c8ad;
-  margin-top: 8px;
+  margin-top: 14px;
+  line-height: 1.18;
+  font-family: "DM Serif Display", Georgia, serif;
 }
 .hero-description {
   font-size: 15px;
@@ -1599,8 +1610,11 @@ footer {
     white-space: normal;
     display: inline;
   }
-  .hero h1 {
-    font-size: 46px;
+  .hero-title-main {
+    font-size: clamp(56px, 10vw, 92px);
+  }
+  .hero h1 em {
+    font-size: clamp(22px, 4.5vw, 34px);
   }
   .hero-actions {
     flex-direction: column;
@@ -1745,9 +1759,12 @@ footer {
     padding-bottom: 25px;
     gap: 35px;
   }
-  .hero h1 {
-    font-size: 43px;
+  .hero-title-main {
+    font-size: clamp(48px, 12.5vw, 76px);
     max-width: 490px;
+  }
+  .hero h1 em {
+    font-size: clamp(20px, 5.2vw, 30px);
   }
   .hero-description {
     font-size: 14px;
