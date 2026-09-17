@@ -324,6 +324,10 @@ function ServiceCards() {
             className="service-card"
             spotlightColor="rgba(255, 255, 255, 0.22)"
           >
+            <div
+              className="service-card-bg-img"
+              style={{ backgroundImage: `url(/images/services/${s.slug}.jpg)` }}
+            />
             <div className="card-top">
               <s.icon size={29} strokeWidth={1.3} />
               <span>0{i + 1}</span>
@@ -955,6 +959,7 @@ function Landing() {
           <ScrollReveal as="div" containerClassName="landing-emergence-image-col" baseRotation={1} blurStrength={2}>
             <div className="landing-emergence-image-wrapper">
               <img
+                key={imageSrc}
                 src={imageSrc}
                 alt={found ? found.title : "Bufete Jurídico Guadarrama"}
                 className="landing-emergence-img"

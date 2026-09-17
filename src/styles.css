@@ -671,6 +671,7 @@ header.scrolled {
 }
 
 .service-card {
+  position: relative;
   border: 1px solid #dcdcd6;
   padding: 30px;
   border-radius: 12px;
@@ -680,7 +681,28 @@ header.scrolled {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-card-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  filter: blur(18px);
+  transform: scale(1.12);
+  transition: opacity 0.45s ease, filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 11px;
+}
+
+.service-card:hover .service-card-bg-img {
+  opacity: 0.25;
+  filter: blur(2px);
+  transform: scale(1.02);
 }
 
 .card-top {
@@ -2235,12 +2257,31 @@ footer .official-logo { width: 250px; max-width: 100%; }
   background: #0b1f33;
 }
 
+@keyframes blurImageDeploy {
+  0% {
+    filter: blur(28px);
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  50% {
+    filter: blur(10px);
+    opacity: 0.85;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .landing-emergence-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  animation: blurImageDeploy 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, transform, opacity;
 }
 
 .landing-emergence-image-wrapper:hover .landing-emergence-img {
