@@ -183,16 +183,45 @@ function Hero({
   city?: string;
   service?: (typeof services)[number];
 }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoopBlur, setIsLoopBlur] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let animId: number;
+    const checkTime = () => {
+      if (video.duration && !video.paused) {
+        const remaining = video.duration - video.currentTime;
+        const current = video.currentTime;
+        // Blur suave en los últimos 1.2s antes del loop y primeros 0.8s del inicio
+        if (remaining <= 1.2 || current <= 0.8) {
+          setIsLoopBlur(true);
+        } else {
+          setIsLoopBlur(false);
+        }
+      }
+      animId = requestAnimationFrame(checkTime);
+    };
+
+    animId = requestAnimationFrame(checkTime);
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
   return (
     <section className="hero">
       <div className="hero-video-bg">
         <video
+          ref={videoRef}
+          className={isLoopBlur ? "loop-blur" : ""}
           autoPlay
           loop
           muted
           playsInline
           src="/8k,_static_camera_202609081753.mp4"
         />
+        <div className={`hero-video-loop-blur ${isLoopBlur ? "active" : ""}`} />
         <div className="hero-video-overlay" />
       </div>
       <div className="container hero-grid">

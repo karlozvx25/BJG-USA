@@ -317,6 +317,26 @@ header.scrolled {
   object-fit: cover;
   object-position: center;
   display: block;
+  transition: filter 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: filter, transform;
+}
+.hero-video-bg video.loop-blur {
+  filter: blur(14px) brightness(0.94);
+  transform: scale(1.04);
+}
+.hero-video-loop-blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(11, 31, 51, 0.2);
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-video-loop-blur.active {
+  opacity: 1;
 }
 .hero-video-bg::before {
   content: "";
