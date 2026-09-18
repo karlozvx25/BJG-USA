@@ -195,8 +195,8 @@ function Hero({
       if (video.duration && !video.paused) {
         const remaining = video.duration - video.currentTime;
         const current = video.currentTime;
-        // Blur suave en los últimos 1.2s antes del loop y primeros 0.8s del inicio
-        if (remaining <= 1.2 || current <= 0.8) {
+        // Micro-transición únicamente en el milisegundo exacto del corte/loop
+        if (remaining <= 0.12 || current <= 0.08) {
           setIsLoopBlur(true);
         } else {
           setIsLoopBlur(false);
