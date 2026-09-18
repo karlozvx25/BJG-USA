@@ -596,6 +596,16 @@ function Dashboard() {
 function Portal() {
   return (
     <section className="portal-section" id="expediente">
+      <div className="portal-video-bg">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/skyback.mp4"
+        />
+        <div className="portal-video-overlay" />
+      </div>
       <div className="container portal-grid">
         <div>
           <ScrollReveal as="p" containerClassName="eyebrow light" baseRotation={1} blurStrength={2}>

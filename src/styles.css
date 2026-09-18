@@ -912,16 +912,37 @@ header.scrolled {
   position: relative;
   padding: 90px 0;
   background-color: #0b1f33;
-  background-image: 
-    linear-gradient(rgba(11, 31, 51, 0.88), rgba(11, 31, 51, 0.90)),
-    url("/images/Gemini_Generated_Image_17ote217ote217ot.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   color: #f6f3ed;
   overflow: hidden;
 }
+.portal-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.portal-video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.portal-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(11, 31, 51, 0.88) 0%,
+    rgba(11, 31, 51, 0.78) 50%,
+    rgba(11, 31, 51, 0.90) 100%
+  );
+}
 .portal-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 0.85fr 1.2fr;
   gap: 80px;
