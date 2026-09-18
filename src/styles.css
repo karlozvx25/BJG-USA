@@ -917,8 +917,11 @@ header.scrolled {
 }
 .portal-video-bg {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: calc(50% + 140px);
+  max-width: 900px;
   height: 100%;
   z-index: 0;
   overflow: hidden;
@@ -928,17 +931,34 @@ header.scrolled {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: left center;
+  display: block;
+}
+.portal-video-bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 240px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  mask-image: linear-gradient(to left, black 25%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, black 25%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 .portal-video-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(11, 31, 51, 0.88) 0%,
-    rgba(11, 31, 51, 0.78) 50%,
-    rgba(11, 31, 51, 0.90) 100%
+    to right,
+    rgba(11, 31, 51, 0.45) 0%,
+    rgba(11, 31, 51, 0.70) 55%,
+    rgba(11, 31, 51, 0.95) 85%,
+    #0b1f33 100%
   );
+  z-index: 1;
 }
 .portal-grid {
   position: relative;
