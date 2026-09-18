@@ -413,7 +413,7 @@ function ServiceCards() {
         <div className="section-top">
           <Heading
             eyebrow="EMPECEMOS POR LO QUE IMPORTA"
-            title="¿Qué necesitas resolver en México?"
+            title="Cobertura Jurídica Integral"
           />
           <p className="section-aside">
             Comprender a detalle su situación es nuestro punto de partida.
