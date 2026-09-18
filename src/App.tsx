@@ -61,9 +61,9 @@ function Heading({
         {title}
       </ScrollReveal>
       {children && (
-        <ScrollReveal as="p" containerClassName="lede" baseRotation={1} blurStrength={3}>
+        <p className="lede">
           {children}
-        </ScrollReveal>
+        </p>
       )}
     </div>
   );
@@ -369,13 +369,13 @@ function Proof() {
         ].map(([Icon, t, d]) => {
           const I = Icon as typeof Globe2;
           return (
-            <ScrollReveal as="div" key={String(t)} baseRotation={0.5} blurStrength={2} containerClassName="proof-item">
+            <div key={String(t)} className="proof-item">
               <I size={24} />
               <div>
                 <strong>{String(t)}</strong>
                 <span>{String(d)}</span>
               </div>
-            </ScrollReveal>
+            </div>
           );
         })}
       </div>
@@ -415,10 +415,10 @@ function ServiceCards() {
             eyebrow="EMPECEMOS POR LO QUE IMPORTA"
             title="¿Qué necesitas resolver en México?"
           />
-          <ScrollReveal as="p" containerClassName="section-aside" baseRotation={1} blurStrength={3}>
+          <p className="section-aside">
             Comprender a detalle su situación es nuestro punto de partida.
             Analizamos su situación para ofrecerle la solución jurídica adecuada.
-          </ScrollReveal>
+          </p>
         </div>
         <div className="services-grid">
           {services.map((s, i) => (
@@ -437,12 +437,8 @@ function ServiceCards() {
                 <s.icon size={29} strokeWidth={1.3} />
                 <span>0{i + 1}</span>
               </div>
-              <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
-                {s.title}
-              </ScrollReveal>
-              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
-                {s.description}
-              </ScrollReveal>
+              <h3>{s.title}</h3>
+              <p>{s.description}</p>
               <span className="card-link">
                 Ver opciones <Arrow />
               </span>
@@ -462,15 +458,11 @@ function Process() {
       />
       <div className="process-grid">
         {steps.map(([t, d], i) => (
-          <ScrollReveal as="div" key={t} baseRotation={1} blurStrength={3} containerClassName="process-step-item">
+          <div key={t} className="process-step-item">
             <span className="step-number">0{i + 1}</span>
-            <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
-              {t}
-            </ScrollReveal>
-            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
-              {d}
-            </ScrollReveal>
-          </ScrollReveal>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </div>
         ))}
       </div>
       <CTA />
@@ -614,10 +606,10 @@ function Portal() {
             <br />
             <em>Siempre visible.</em>
           </ScrollReveal>
-          <ScrollReveal as="p" baseRotation={1} blurStrength={3}>
+          <p>
             Cuando estás lejos, saber qué está pasando importa. Un espacio para
             tus documentos, avances y próximos pasos.
-          </ScrollReveal>
+          </p>
           <ul className="check-list">
             <li>
               <Check /> Información en un solo lugar
@@ -668,13 +660,13 @@ function Contact() {
           <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
             La distancia no debería <em>detenerte.</em>
           </ScrollReveal>
-          <ScrollReveal as="p" baseRotation={1} blurStrength={3}>
+          <p>
             Cuéntanos qué necesitas resolver en México. No necesitas usar
             términos jurídicos.
-          </ScrollReveal>
-          <ScrollReveal as="span" containerClassName="contact-signature" baseRotation={1} blurStrength={2}>
+          </p>
+          <span className="contact-signature">
             México sigue cerca.
-          </ScrollReveal>
+          </span>
         </div>
         <div className="contact-form">
           {done ? (
@@ -821,19 +813,14 @@ function Home() {
               <em>Control total y visibilidad absoluta.</em>
             </ScrollReveal>
             <div className="emotional-copy">
-              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+              <p>
                 Navegar el sistema legal de México y Estados Unidos exige
                 precisión y comunicación estratégica.
-              </ScrollReveal>
-              <ScrollReveal
-                as="p"
-                baseRotation={1}
-                blurStrength={2}
-                containerClassName="emotional-copy-right"
-              >
+              </p>
+              <p className="emotional-copy-right">
                 Transformamos esta gestión en un proceso transparente, donde
                 usted tiene visibilidad y control total de sus trámites.
-              </ScrollReveal>
+              </p>
             </div>
           </div>
         </div>
@@ -846,10 +833,10 @@ function Home() {
             eyebrow="PERSONAS DETRÁS DEL DERECHO"
             title="Detrás de cada caso hay una historia."
           />
-          <ScrollReveal as="p" containerClassName="section-aside" baseRotation={1} blurStrength={3}>
+          <p className="section-aside">
             Y detrás de cada expediente, personas trabajando para resolverla.
             Experiencia jurídica, análisis y acompañamiento personal.
-          </ScrollReveal>
+          </p>
         </div>
         <div className="team-grid">
           {[
@@ -862,8 +849,8 @@ function Home() {
                 compact
                 label={`Retrato del equipo · ${String(i + 1).padStart(2, "0")}`}
               />
-              <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>{t}</ScrollReveal>
-              <ScrollReveal as="p" baseRotation={1} blurStrength={2}>Perfil y credenciales por incorporar.</ScrollReveal>
+              <h3>{t}</h3>
+              <p>Perfil y credenciales por incorporar.</p>
             </article>
           ))}
         </div>
@@ -887,12 +874,12 @@ function Home() {
             <br />
             Una misma dirección.
           </ScrollReveal>
-          <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+          <p>
             Un caso complejo no debería depender de una sola opinión. Cuando un
             asunto lo requiere, el equipo puede analizarlo desde diferentes
             perspectivas jurídicas para construir una estrategia mejor
             fundamentada.
-          </ScrollReveal>
+          </p>
         </div>
       </section>
       <section className="section container" id="testimonios">
@@ -906,14 +893,14 @@ function Home() {
             <span className="demo-badge">
               ESPACIO EDITORIAL · TESTIMONIO PENDIENTE
             </span>
-            <ScrollReveal as="h3" baseRotation={1} blurStrength={2}>
+            <h3>
               La tranquilidad de saber qué sigue.
-            </ScrollReveal>
-            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+            </h3>
+            <p>
               Aquí compartiremos experiencias de clientes, con su autorización:
               qué necesitaban resolver en México, cómo vivieron el proceso y qué
               cambió para ellos.
-            </ScrollReveal>
+            </p>
             <span className="muted">
               Video subtitulado · Nombre · Ciudad · Tipo de asunto
             </span>
@@ -940,13 +927,13 @@ function Home() {
           </div>
           <div>
             <FileText size={28} />
-            <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
+            <h3>
               Cada resultado tiene una historia.
-            </ScrollReveal>
-            <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+            </h3>
+            <p>
               Los casos y cifras se incorporarán con evidencia verificable. Cada
               asunto tiene circunstancias propias.
-            </ScrollReveal>
+            </p>
           </div>
         </div>
       </section>
@@ -964,17 +951,17 @@ function Home() {
           <ScrollReveal as="h2" baseRotation={2} blurStrength={4}>
             De una generación <em>a otra.</em>
           </ScrollReveal>
-          <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+          <p>
             La práctica jurídica ha cambiado. La tecnología y la forma de
             comunicarnos también. Pero hay algo que no debería cambiar:
-          </ScrollReveal>
-          <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>
+          </p>
+          <h3>
             Decir la verdad al cliente.
-          </ScrollReveal>
-          <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+          </h3>
+          <p>
             Hoy esa convicción nos guía para acompañar a quienes construyen su
             vida lejos de México.
-          </ScrollReveal>
+          </p>
         </div>
       </section>
       <section className="guide-section" id="guia">
@@ -994,7 +981,7 @@ function Home() {
                   {["PATRIMONIO", "HERENCIAS", "REPRESENTACIÓN", "FAMILIA"][i]}{" "}
                   · BORRADOR EDITORIAL
                 </small>
-                <ScrollReveal as="h3" baseRotation={1.5} blurStrength={3}>{t}</ScrollReveal>
+                <h3>{t}</h3>
                 <span className="card-link">
                   Explorar tema <Arrow />
                 </span>
@@ -1026,7 +1013,7 @@ function Home() {
                     {q}
                     <Plus size={19} />
                   </summary>
-                  <ScrollReveal as="p" baseRotation={1} blurStrength={2}>{a}</ScrollReveal>
+                  <p>{a}</p>
                 </details>
               ))}
             </div>
@@ -1068,7 +1055,7 @@ function Landing() {
       <div className="container landing-emergence-container">
         <div className="landing-emergence-grid">
           {/* Columna Izquierda: Imagen del Caso y Botón Regresar */}
-          <ScrollReveal as="div" containerClassName="landing-emergence-image-col" baseRotation={1} blurStrength={2}>
+          <div className="landing-emergence-image-col">
             <div className="landing-emergence-image-wrapper">
               <img
                 key={imageSrc}
@@ -1089,7 +1076,7 @@ function Landing() {
               <ArrowLeft size={16} />
               <span>Regresar a Servicios</span>
             </Link>
-          </ScrollReveal>
+          </div>
 
           {/* Columna Derecha: Texto y Contenido */}
           <div className="landing-emergence-text-col">
@@ -1099,14 +1086,14 @@ function Landing() {
             <ScrollReveal as="h1" containerClassName="landing-emergence-title" baseRotation={1.5} blurStrength={3}>
               {found ? found.title : "México sigue cerca."}
             </ScrollReveal>
-            <ScrollReveal as="p" containerClassName="landing-emergence-desc" baseRotation={1} blurStrength={2}>
+            <p className="landing-emergence-desc">
               {serviceDesc}
               {city ? ` Atención para residentes de ${cities[city]}.` : ""}
-            </ScrollReveal>
-            <ScrollReveal as="p" containerClassName="landing-emergence-disclaimer" baseRotation={1} blurStrength={2}>
+            </p>
+            <p className="landing-emergence-disclaimer">
               La atención por ciudad se refiere al lugar de residencia del cliente;
               no implica una oficina ni representación jurídica en Estados Unidos.
-            </ScrollReveal>
+            </p>
             <div style={{ marginTop: "32px" }}>
               <CTA />
             </div>
@@ -1131,20 +1118,20 @@ function Guide() {
       <ScrollReveal as="h1" baseRotation={1.5} blurStrength={3}>
         {title}
       </ScrollReveal>
-      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+      <p>
         Para iniciar una conversación con el equipo, puedes organizar estas
         preguntas:
-      </ScrollReveal>
+      </p>
       <ul className="article-list">
         <li>¿Qué necesito resolver y qué me preocupa más?</li>
         <li>¿En qué lugar de México está relacionado mi asunto?</li>
         <li>¿Quiénes están involucrados y qué información tengo disponible?</li>
         <li>¿Hay alguna fecha importante que deba mencionar?</li>
       </ul>
-      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+      <p>
         El contenido específico de esta guía se incorporará después de su
         revisión por el despacho. No sustituye el análisis de tu situación.
-      </ScrollReveal>
+      </p>
       <CTA />
     </section>
   );
@@ -1158,21 +1145,21 @@ function Legal() {
       <ScrollReveal as="h1" baseRotation={1.5} blurStrength={3}>
         Transparencia desde el primer paso.
       </ScrollReveal>
-      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+      <p>
         La información presentada tiene fines informativos y no constituye
         asesoría jurídica personalizada. La atención de cada asunto dependerá de
         sus circunstancias y de la formalización de la relación profesional.
-      </ScrollReveal>
+      </p>
       <ScrollReveal as="h2" baseRotation={1.5} blurStrength={3}>
         Privacidad y términos
       </ScrollReveal>
-      <ScrollReveal as="p" baseRotation={1} blurStrength={2}>
+      <p>
         Esta demostración no envía formularios ni guarda sus datos en un
         servidor o en el navegador. No incluye analítica ni autenticación. Los
         avisos definitivos, la identidad del responsable y los canales para
         ejercer derechos deben incorporarse antes de habilitar la recepción de
         datos.
-      </ScrollReveal>
+      </p>
       <Link to="/" className="text-link">
         Volver al inicio <Arrow />
       </Link>
