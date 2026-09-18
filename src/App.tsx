@@ -208,40 +208,36 @@ function Header() {
             className="menu-toggle"
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label="Abrir menú"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setOpen(!open)}
           >
             {open ? <X /> : <Menu />}
           </button>
         </div>
-        <div
-          id="mobile-nav"
-          className={`mobile-nav ${open ? "open" : ""}`}
-          aria-hidden={!open}
-        >
-          <div className="container">
-            <Link to="/#servicios" onClick={() => setOpen(false)}>
-              Qué necesitas resolver
+        {open && (
+          <nav
+            id="mobile-nav"
+            className="mobile-nav"
+            aria-label="Navegación móvil"
+          >
+            {[
+              ["servicios", "Qué necesitas resolver"],
+              ["proceso", "Cómo funciona"],
+              ["equipo", "Nosotros"],
+              ["testimonios", "Testimonios"],
+              ["guia", "Guía BJG"],
+              ["contacto", "Contacto"],
+            ].map(([id, t]) => (
+              <Link key={id} to={`/#${id}`}>
+                {t}
+                <Arrow />
+              </Link>
+            ))}
+            <Link to="/mi-expediente">
+              Mi expediente <LockKeyhole size={16} />
             </Link>
-            <Link to="/#proceso" onClick={() => setOpen(false)}>
-              Cómo funciona
-            </Link>
-            <Link to="/#equipo" onClick={() => setOpen(false)}>
-              Nosotros
-            </Link>
-            <Link to="/#guia" onClick={() => setOpen(false)}>
-              Guía BJG
-            </Link>
-            <Link
-              className="portal-link"
-              to="/mi-expediente"
-              onClick={() => setOpen(false)}
-            >
-              <LockKeyhole size={14} /> Mi expediente
-            </Link>
-            <CTA secondary to="/#contacto" />
-          </div>
-        </div>
+          </nav>
+        )}
       </header>
     </>
   );
