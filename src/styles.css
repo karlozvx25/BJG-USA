@@ -297,14 +297,17 @@ header.scrolled {
 }
 .hero-video-bg {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 50%;
-  height: 100%;
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+  width: 47%;
+  height: 70%;
+  max-height: 560px;
   z-index: 0;
   overflow: hidden;
+  border-radius: 20px;
   pointer-events: none;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
 }
 .hero-video-bg video {
   width: 100%;
