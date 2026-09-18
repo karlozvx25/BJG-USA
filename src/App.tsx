@@ -184,22 +184,24 @@ function Hero({
   service?: (typeof services)[number];
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isLoopBlur, setIsLoopBlur] = useState(false);
+  const [isLoopFade, setIsLoopFade] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    video.playbackRate = 0.75;
 
     let animId: number;
     const checkTime = () => {
       if (video.duration && !video.paused) {
         const remaining = video.duration - video.currentTime;
         const current = video.currentTime;
-        // Micro-transición únicamente en el milisegundo exacto del corte/loop
-        if (remaining <= 0.12 || current <= 0.08) {
-          setIsLoopBlur(true);
+        // Transición de degradado en el cierre y reinicio del bucle
+        if (remaining <= 0.45 || current <= 0.35) {
+          setIsLoopFade(true);
         } else {
-          setIsLoopBlur(false);
+          setIsLoopFade(false);
         }
       }
       animId = requestAnimationFrame(checkTime);
@@ -214,14 +216,20 @@ function Hero({
       <div className="hero-video-bg">
         <video
           ref={videoRef}
-          className={isLoopBlur ? "loop-blur" : ""}
+          className={isLoopFade ? "loop-fade" : ""}
           autoPlay
           loop
           muted
           playsInline
           src="/8k,_static_camera_202609081753.mp4"
+          onPlay={(e) => {
+            e.currentTarget.playbackRate = 0.75;
+          }}
+          onLoadedMetadata={(e) => {
+            e.currentTarget.playbackRate = 0.75;
+          }}
         />
-        <div className={`hero-video-loop-blur ${isLoopBlur ? "active" : ""}`} />
+        <div className={`hero-video-loop-fade ${isLoopFade ? "active" : ""}`} />
         <div className="hero-video-overlay" />
       </div>
       <div className="container hero-grid">
