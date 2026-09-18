@@ -76,24 +76,114 @@ function Logo({ variant = "light", className = "" }: { variant?: "light" | "dark
 function Brand() {
   return <Link to="/" className="brand" aria-label="Bufete Jurídico Guadarrama USA, inicio"><Logo /></Link>;
 }
+function ScrollManager() {
+  const location = useLocation();
+  const prevPathRef = useRef<string>(location.pathname);
+  const isInitialMount = useRef<boolean>(true);
+
+  // 1. Guardar continuamente la posición de scroll y la sección activa en sessionStorage
+  useEffect(() => {
+    const handleScroll = () => {
+      try {
+        const scrollY = window.scrollY;
+        sessionStorage.setItem(`bjg_scroll_${location.pathname}`, String(scrollY));
+
+        const sections = document.querySelectorAll<HTMLElement>("section[id]");
+        let currentSectionId = "";
+        const scrollMiddle = scrollY + window.innerHeight / 3;
+        sections.forEach((sec) => {
+          const top = sec.offsetTop;
+          const height = sec.offsetHeight;
+          if (scrollMiddle >= top && scrollMiddle < top + height) {
+            currentSectionId = sec.id;
+          }
+        });
+        if (currentSectionId) {
+          sessionStorage.setItem(`bjg_section_${location.pathname}`, currentSectionId);
+        }
+      } catch {
+        // Ignorar posibles restricciones de storage
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("beforeunload", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("beforeunload", handleScroll);
+    };
+  }, [location.pathname]);
+
+  // 2. Al recargar o cambiar de ruta
+  useEffect(() => {
+    const pathChanged = prevPathRef.current !== location.pathname;
+    prevPathRef.current = location.pathname;
+
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+
+      if (location.hash) {
+        setTimeout(() => {
+          const elem = document.getElementById(location.hash.slice(1));
+          if (elem) elem.scrollIntoView({ behavior: "smooth" });
+        }, 80);
+      } else {
+        // Restaurar posición exacta de scroll o sección en la que estaba
+        try {
+          const savedY = sessionStorage.getItem(`bjg_scroll_${location.pathname}`);
+          const savedSec = sessionStorage.getItem(`bjg_section_${location.pathname}`);
+
+          if (savedY !== null && Number(savedY) > 0) {
+            const y = Number(savedY);
+            window.scrollTo({ top: y, behavior: "instant" });
+            setTimeout(() => {
+              window.scrollTo({ top: y, behavior: "instant" });
+            }, 60);
+            setTimeout(() => {
+              window.scrollTo({ top: y, behavior: "instant" });
+            }, 200);
+          } else if (savedSec) {
+            setTimeout(() => {
+              const elem = document.getElementById(savedSec);
+              if (elem) elem.scrollIntoView({ behavior: "instant" });
+            }, 80);
+          }
+        } catch {
+          // Ignorar
+        }
+      }
+    } else {
+      // Navegación entre rutas o hashes
+      if (location.hash) {
+        setTimeout(() => {
+          const elem = document.getElementById(location.hash.slice(1));
+          if (elem) elem.scrollIntoView({ behavior: "smooth" });
+        }, 50);
+      } else if (pathChanged) {
+        window.scrollTo(0, 0);
+      }
+    }
+  }, [location]);
+
+  return null;
+}
 function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
   useEffect(() => {
     setOpen(false);
-    if (location.hash) {
-      setTimeout(
-        () => document.getElementById(location.hash.slice(1))?.scrollIntoView(),
-        50,
-      );
-    } else window.scrollTo(0, 0);
   }, [location]);
+
   useEffect(() => {
     const f = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", f, { passive: true });
+    f();
     return () => window.removeEventListener("scroll", f);
   }, []);
+
   return (
     <>
       <a className="skip" href="#main">
@@ -118,40 +208,45 @@ function Header() {
             className="menu-toggle"
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-label="Abrir menú"
             onClick={() => setOpen(!open)}
           >
             {open ? <X /> : <Menu />}
           </button>
         </div>
-        {open && (
-          <nav
-            id="mobile-nav"
-            className="mobile-nav"
-            aria-label="Navegación móvil"
-          >
-            {[
-              ["servicios", "Qué necesitas resolver"],
-              ["proceso", "Cómo funciona"],
-              ["equipo", "Nosotros"],
-              ["testimonios", "Testimonios"],
-              ["guia", "Guía BJG"],
-              ["contacto", "Contacto"],
-            ].map(([id, t]) => (
-              <Link key={id} to={`/#${id}`}>
-                {t}
-                <Arrow />
-              </Link>
-            ))}
-            <Link to="/mi-expediente">
-              Mi expediente <LockKeyhole size={16} />
+        <div
+          id="mobile-nav"
+          className={`mobile-nav ${open ? "open" : ""}`}
+          aria-hidden={!open}
+        >
+          <div className="container">
+            <Link to="/#servicios" onClick={() => setOpen(false)}>
+              Qué necesitas resolver
             </Link>
-          </nav>
-        )}
+            <Link to="/#proceso" onClick={() => setOpen(false)}>
+              Cómo funciona
+            </Link>
+            <Link to="/#equipo" onClick={() => setOpen(false)}>
+              Nosotros
+            </Link>
+            <Link to="/#guia" onClick={() => setOpen(false)}>
+              Guía BJG
+            </Link>
+            <Link
+              className="portal-link"
+              to="/mi-expediente"
+              onClick={() => setOpen(false)}
+            >
+              <LockKeyhole size={14} /> Mi expediente
+            </Link>
+            <CTA secondary to="/#contacto" />
+          </div>
+        </div>
       </header>
     </>
   );
 }
+
 function Art({
   label = "Espacio para fotografía del equipo",
   compact = false,
@@ -184,31 +279,11 @@ function Hero({
   service?: (typeof services)[number];
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isLoopFade, setIsLoopFade] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.playbackRate = 0.75;
-
-    let animId: number;
-    const checkTime = () => {
-      if (video.duration && !video.paused) {
-        const remaining = video.duration - video.currentTime;
-        const current = video.currentTime;
-        // Transición de degradado en el cierre y reinicio del bucle
-        if (remaining <= 0.45 || current <= 0.35) {
-          setIsLoopFade(true);
-        } else {
-          setIsLoopFade(false);
-        }
-      }
-      animId = requestAnimationFrame(checkTime);
-    };
-
-    animId = requestAnimationFrame(checkTime);
-    return () => cancelAnimationFrame(animId);
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75;
+    }
   }, []);
 
   return (
@@ -216,7 +291,6 @@ function Hero({
       <div className="hero-video-bg">
         <video
           ref={videoRef}
-          className={isLoopFade ? "loop-fade" : ""}
           autoPlay
           loop
           muted
@@ -229,7 +303,6 @@ function Hero({
             e.currentTarget.playbackRate = 0.75;
           }}
         />
-        <div className={`hero-video-loop-fade ${isLoopFade ? "active" : ""}`} />
         <div className="hero-video-overlay" />
       </div>
       <div className="container hero-grid">
@@ -1216,6 +1289,7 @@ export default function App() {
   }, [location.pathname]);
   return (
     <>
+      <ScrollManager />
       <Header />
       <main id="main">
         <Routes>
