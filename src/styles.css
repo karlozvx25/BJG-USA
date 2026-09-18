@@ -300,7 +300,7 @@ header.scrolled {
   top: 50%;
   right: 2%;
   transform: translateY(-50%);
-  width: 47%;
+  width: calc(47% + 100px);
   height: 70%;
   max-height: 560px;
   z-index: 0;
