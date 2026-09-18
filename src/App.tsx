@@ -81,26 +81,11 @@ function ScrollManager() {
   const prevPathRef = useRef<string>(location.pathname);
   const isInitialMount = useRef<boolean>(true);
 
-  // 1. Guardar continuamente la posición de scroll y la sección activa en sessionStorage
+  // 1. Guardar continuamente la posición exacta de scroll en sessionStorage
   useEffect(() => {
     const handleScroll = () => {
       try {
-        const scrollY = window.scrollY;
-        sessionStorage.setItem(`bjg_scroll_${location.pathname}`, String(scrollY));
-
-        const sections = document.querySelectorAll<HTMLElement>("section[id]");
-        let currentSectionId = "";
-        const scrollMiddle = scrollY + window.innerHeight / 3;
-        sections.forEach((sec) => {
-          const top = sec.offsetTop;
-          const height = sec.offsetHeight;
-          if (scrollMiddle >= top && scrollMiddle < top + height) {
-            currentSectionId = sec.id;
-          }
-        });
-        if (currentSectionId) {
-          sessionStorage.setItem(`bjg_section_${location.pathname}`, currentSectionId);
-        }
+        sessionStorage.setItem(`bjg_scroll_${location.pathname}`, String(window.scrollY));
       } catch {
         // Ignorar posibles restricciones de storage
       }
@@ -127,27 +112,17 @@ function ScrollManager() {
         setTimeout(() => {
           const elem = document.getElementById(location.hash.slice(1));
           if (elem) elem.scrollIntoView({ behavior: "smooth" });
-        }, 80);
+        }, 100);
       } else {
-        // Restaurar posición exacta de scroll o sección en la que estaba
+        // Restaurar la posición exacta de scroll (si es 0 en el hero, permanece exactamente en el hero)
         try {
           const savedY = sessionStorage.getItem(`bjg_scroll_${location.pathname}`);
-          const savedSec = sessionStorage.getItem(`bjg_section_${location.pathname}`);
-
-          if (savedY !== null && Number(savedY) > 0) {
+          if (savedY !== null && !isNaN(Number(savedY))) {
             const y = Number(savedY);
             window.scrollTo({ top: y, behavior: "instant" });
             setTimeout(() => {
               window.scrollTo({ top: y, behavior: "instant" });
             }, 60);
-            setTimeout(() => {
-              window.scrollTo({ top: y, behavior: "instant" });
-            }, 200);
-          } else if (savedSec) {
-            setTimeout(() => {
-              const elem = document.getElementById(savedSec);
-              if (elem) elem.scrollIntoView({ behavior: "instant" });
-            }, 80);
           }
         } catch {
           // Ignorar
