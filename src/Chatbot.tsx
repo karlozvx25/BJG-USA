@@ -302,14 +302,11 @@ export default function Chatbot() {
           className="bjg-chatbot-toggle"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Abrir Asistente Jurídico BJG"
+          title="Abrir Asistente Jurídico BJG"
         >
           <div className="bjg-chatbot-toggle-icon">
             <img src="/buhologo.svg" alt="Búho BJG" />
             <span className="bjg-chatbot-toggle-badge" />
-          </div>
-          <div className="bjg-chatbot-toggle-text">
-            <span className="bjg-chatbot-toggle-title">BJG</span>
-            <span className="bjg-chatbot-toggle-sub">USA</span>
           </div>
         </button>
       </div>
