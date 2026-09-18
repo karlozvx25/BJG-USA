@@ -274,21 +274,45 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Chatbot Toggle Button */}
-      <button
-        className="bjg-chatbot-toggle"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Abrir Asistente Jurídico BJG"
-      >
-        <div className="bjg-chatbot-toggle-icon">
-          <img src="/buhologo.svg" alt="Búho BJG" />
-          <span className="bjg-chatbot-toggle-badge" />
-        </div>
-        <div className="bjg-chatbot-toggle-text">
-          <span className="bjg-chatbot-toggle-title">BJG</span>
-          <span className="bjg-chatbot-toggle-sub">USA</span>
-        </div>
-      </button>
+      {/* Floating Action Buttons */}
+      <div className="bjg-floating-actions">
+        {/* Floating WhatsApp Button */}
+        <a
+          href="https://wa.me/5215500000000?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20asesor%C3%ADa%20jur%C3%ADdica%20en%20M%C3%A9xico"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bjg-whatsapp-toggle"
+          aria-label="Contactar por WhatsApp"
+          title="Contactar por WhatsApp"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="28"
+            height="28"
+            fill="currentColor"
+            className="bjg-whatsapp-svg"
+          >
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67ZM8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.64 7.89 7 8.49 7 9.72C7 10.95 7.89 12.14 8.02 12.31C8.15 12.48 9.76 15.09 12.28 16.07C14.37 16.89 14.8 16.73 15.26 16.69C15.72 16.65 16.74 16.08 16.95 15.48C17.16 14.88 17.16 14.37 17.1 14.26C17.04 14.15 16.87 14.09 16.62 13.96C16.37 13.84 15.15 13.24 14.92 13.16C14.69 13.08 14.53 13.03 14.36 13.28C14.19 13.53 13.72 14.09 13.58 14.26C13.43 14.42 13.29 14.44 13.04 14.32C12.79 14.19 11.99 13.93 11.04 13.08C10.3 12.42 9.79 11.61 9.65 11.36C9.5 11.11 9.63 10.98 9.76 10.85C9.87 10.74 10.01 10.56 10.14 10.41C10.27 10.26 10.31 10.15 10.39 9.99C10.48 9.82 10.43 9.68 10.37 9.56C10.31 9.43 9.82 8.23 9.61 7.74C9.41 7.26 9.21 7.32 9.06 7.31C8.91 7.31 8.74 7.33 8.53 7.33Z" />
+          </svg>
+          <span className="bjg-whatsapp-badge" />
+        </a>
+
+        {/* Floating Chatbot Toggle Button */}
+        <button
+          className="bjg-chatbot-toggle"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Abrir Asistente Jurídico BJG"
+        >
+          <div className="bjg-chatbot-toggle-icon">
+            <img src="/buhologo.svg" alt="Búho BJG" />
+            <span className="bjg-chatbot-toggle-badge" />
+          </div>
+          <div className="bjg-chatbot-toggle-text">
+            <span className="bjg-chatbot-toggle-title">BJG</span>
+            <span className="bjg-chatbot-toggle-sub">USA</span>
+          </div>
+        </button>
+      </div>
 
       {/* Chat Window */}
       {isOpen && (
